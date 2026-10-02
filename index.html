@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>SadraAI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-logo">
+                <img src="logo.png" alt="SadraAI">
+            </div>
+
+            <div class="brand-text">
+                <strong>SadraAI</strong>
+                <span>دستیار هوش مصنوعی</span>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <button class="icon-button" id="donateButton" aria-label="حمایت">
+                <img src="d.png" alt="">
+            </button>
+
+            <button class="icon-button" id="settingsButton" aria-label="تنظیمات">
+                <img src="t.png" alt="">
+            </button>
+        </div>
+    </header>
+
+    <main class="chat-wrapper">
+
+        <section class="welcome" id="welcome">
+            <div class="welcome-logo">
+                <img src="logo.png" alt="SadraAI">
+            </div>
+
+            <div class="welcome-content">
+                <span class="welcome-badge">
+                    <span class="status-dot"></span>
+                    آماده گفتگو
+                </span>
+
+                <h1>سلام، من <span>SadraAI</span> هستم.</h1>
+
+                <p>
+                    برای پاسخ‌گویی، ایده‌پردازی، برنامه‌نویسی و انجام کارهای مختلف آماده‌ام.
+                </p>
+            </div>
+
+            <div class="suggestions">
+                <button class="suggestion" data-prompt="یک ایده خلاقانه و کاربردی برای یک پروژه بهم بده">
+                    <span>✦</span>
+                    ایده خلاقانه
+                </button>
+
+                <button class="suggestion" data-prompt="یک مفهوم سخت را خیلی ساده و قابل فهم توضیح بده">
+                    <span>◌</span>
+                    توضیح ساده
+                </button>
+
+                <button class="suggestion" data-prompt="یک پروژه جذاب برای یادگیری برنامه نویسی پیشنهاد بده">
+                    <span>&lt;/&gt;</span>
+                    برنامه‌نویسی
+                </button>
+            </div>
+        </section>
+
+        <section class="messages" id="messages"></section>
+
+        <div class="typing-area" id="typingArea">
+            <div class="typing-avatar">
+                <img src="logo.png" alt="SadraAI">
+            </div>
+
+            <div class="typing-content">
+                <span>SadraAI در حال فکر کردن است</span>
+                <div class="typing-dots">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="composer-area">
+
+        <form class="composer" id="chatForm">
+
+            <div class="composer-glow"></div>
+
+            <textarea
+                id="messageInput"
+                rows="1"
+                autocomplete="off"
+                placeholder="پیامتان را برای SadraAI بنویسید..."
+            ></textarea>
+
+            <div class="composer-bottom">
+
+                <div class="composer-hint">
+                    <span>Enter</span>
+                    برای ارسال
+                </div>
+
+                <button class="send-button" id="sendButton" type="submit" aria-label="ارسال">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M21 3L10.5 13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M21 3L14.5 21L10.5 13.5L3 9.5L21 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </form>
+
+        <div class="footer-text">
+            <span>توسعه دهنده : سید محمد صدرا موسوی</span>
+        </div>
+
+    </footer>
+
+</div>
+
+
+<div class="modal-overlay" id="settingsModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+            <div>
+                <h2>تنظیمات</h2>
+                <p>SadraAI را مطابق سلیقه خودت تنظیم کن.</p>
+            </div>
+
+            <button class="close-button" data-close="settingsModal">×</button>
+        </div>
+
+        <div class="settings-content">
+
+            <label class="field-label">
+                اسم کاربر
+            </label>
+
+            <div class="input-with-action">
+                <input
+                    type="text"
+                    id="userName"
+                    placeholder="مثلاً صدرا"
+                    maxlength="40"
+                >
+
+                <button class="small-action" id="copyUserName" type="button">
+                    کپی
+                </button>
+            </div>
+
+            <label class="field-label">
+                دستورالعمل مخصوص من
+            </label>
+
+            <div class="prompt-editor">
+
+                <textarea
+                    id="customInstruction"
+                    placeholder="مثلاً: پاسخ‌ها را کوتاه، دقیق و با مثال ارائه کن..."
+                ></textarea>
+
+                <div class="prompt-actions">
+                    <button type="button" id="copyPrompt">
+                        کپی پرامپت
+                    </button>
+
+                    <button type="button" id="editPrompt">
+                        ویرایش
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="settings-info">
+                این تنظیمات روی همین دستگاه ذخیره می‌شوند.
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="danger-button" id="resetSettings" type="button">
+                پاک کردن تنظیمات
+            </button>
+
+            <button class="primary-button" id="saveSettings" type="button">
+                ذخیره تنظیمات
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal-overlay" id="donateModal">
+
+    <div class="donate-modal">
+
+        <div class="modal-header">
+            <div>
+                <h2>حمایت از SadraAI</h2>
+                <p>اگر SadraAI برایت مفید بوده، می‌توانی از پروژه حمایت کنی.</p>
+            </div>
+
+            <button class="close-button" data-close="donateModal">×</button>
+        </div>
+
+        <div class="donate-frame-wrapper">
+            <iframe
+                src="https://daramet.com/SadraM"
+                title="حمایت از SadraAI"
+                loading="lazy"
+            ></iframe>
+        </div>
+
+        <div class="donate-link">
+            <span>صفحه حمایت</span>
+            <button type="button" id="openDonate">
+                باز کردن
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
