@@ -1,6 +1,6 @@
 import OpenAI from "https://esm.sh/openai";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const client = new OpenAI({
     apiKey: API_KEY,
